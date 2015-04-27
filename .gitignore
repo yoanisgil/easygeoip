@@ -1,0 +1,4 @@
+*.pyc
+*.mmdb
+*.sqlite
+.idea/
