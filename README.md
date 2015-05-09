@@ -15,11 +15,19 @@ launch.
 
 You can now visit http://localhost:5000/8.8.8.8.8 or more generally http://localhost:5000/ip_address_here
 
+# Docker compose
+
+There is already a [docker image](https://registry.hub.docker.com/u/yoanisgil/easygeoip/) for launching the 
+API/Service. Moreover there is already support for docker compose, so after you clone the repo, and provided
+that you have already installed docker, you just need to run:
+
+- docker-compose up
+
+and then visit http://localhost:5000/4.4.4.4
 
 # Todo:
 
 - Add support for various format (XML, YAML ...)
-- Provide docker file
 
 
 

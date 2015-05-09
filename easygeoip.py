@@ -25,6 +25,8 @@ def to_ip(target):
         socket.inet_aton(target)
         return target
     except socket.error:
+        # Set timeout to 1 second.
+        socket.setdefaulttimeout(1)
         result = socket.gethostbyname(target)
 
         return result
@@ -57,4 +59,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

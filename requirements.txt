@@ -11,6 +11,5 @@ ipaddr==2.1.11
 itsdangerous==0.24
 maxminddb==1.2.0
 psycopg2==2.6
-pyspatialite==3.0.1-alpha-0
 requests==2.6.2
 wsgiref==0.1.2

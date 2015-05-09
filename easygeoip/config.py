@@ -23,3 +23,13 @@ class LocalConfig(object):
     TZ_WORLD_SQLITE_PATH = os.path.join(PROJECT_ROOT, 'data', 'tz_world', 'tz_world.sqlite')
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:mysecretpassword@192.168.59.103:15432/tzworld'
+
+    def __init__(self):
+        if 'TZWORLD_NAME' in os.environ:
+            ip_address = os.environ['TZWORLD_PORT_5432_TCP_ADDR']
+            port = os.environ['TZWORLD_PORT_5432_TCP_PORT']
+            self.SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:mysecretpassword@%s:%s/tzworld' % (ip_address, port)
+
+        print self.SQLALCHEMY_DATABASE_URI
+
+

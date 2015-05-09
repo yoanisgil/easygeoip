@@ -4,6 +4,7 @@ from flask import Flask
 from easygeoip.config import ConfigProvider
 from flask.ext.sqlalchemy import SQLAlchemy
 
+
 def create_application():
     app = Flask(__name__)
 
