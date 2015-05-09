@@ -18,10 +18,8 @@ You can now visit http://localhost:5000/8.8.8.8.8 or more generally http://local
 
 # Todo:
 
-- Add static front page
-- Support for DNS names
 - Add support for various format (XML, YAML ...)
-- Provider docker file
+- Provide docker file
 
 
 
