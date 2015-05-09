@@ -1,6 +1,16 @@
 Flask==0.10.1
+Flask-SQLAlchemy==2.0
+Flask-Script==2.0.5
+GeoAlchemy2==0.2.4
 Jinja2==2.7.3
 MarkupSafe==0.23
+SQLAlchemy==1.0.2
 Werkzeug==0.10.4
+geoip2==2.1.0
+ipaddr==2.1.11
 itsdangerous==0.24
+maxminddb==1.2.0
+psycopg2==2.6
+pyspatialite==3.0.1-alpha-0
+requests==2.6.2
 wsgiref==0.1.2
