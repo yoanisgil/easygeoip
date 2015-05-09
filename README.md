@@ -1,6 +1,6 @@
 #easygeoip
 
-This is a thing layer on top of MaxMind's GeoIP databases (version 2 of Country and City database).
+This is a thing layer on top of MaxMind's GeoIP databases (version 2 of Country and City databases).
 It enhances these databases by using the [tzworld](http://efele.net/maps/tz/world/) shapefiles to 
 provide time zone information when not available.
  
