@@ -11,7 +11,7 @@ provide time zone information when not available.
 a [docker image](https://registry.hub.docker.com/u/yoanisgil/tzworld/) so you just can pull and 
 launch.
 - Edit easygeoip/config.py to point to your PostgreSQL instance
-- Launch the application with: python cli.py runserver
+- Launch the application with: python easygeoip.py
 
 You can now visit http://localhost:5000/8.8.8.8.8 or more generally http://localhost:5000/ip_address_here
 
