@@ -13,7 +13,9 @@ launch.
 - Edit easygeoip/config.py to point to your PostgreSQL instance
 - Launch the application with: python easygeoip.py
 
-You can now visit http://localhost:5000/8.8.8.8.8 or more generally http://localhost:5000/ip_address_here
+You can now visit http://localhost:5000/8.8.8.8.8 or more generally http://localhost:5000/ip_address_here.
+There is also a home page for interacting with the service which can be accessed here at http://localhost:5000
+
 
 # Docker compose
 
@@ -23,7 +25,7 @@ that you have already installed docker, you just need to run:
 
 - docker-compose up
 
-and then visit http://localhost:5000/4.4.4.4
+and then visit http://localhost:5000/
 
 # Todo:
 
