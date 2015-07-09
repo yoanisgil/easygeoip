@@ -20,5 +20,8 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
+RUN python cli.py update_maxmind_city_db 
+RUN python cli.py update_maxmind_country_db
+
 CMD ["python", "/webapp/easygeoip.py"]
 
