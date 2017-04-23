@@ -43,19 +43,6 @@ def update_maxmind_file(url):
 
 
 @manager.command
-def update_maxmind_country_db():
-    """
-    Download and uncompress maxmind country database
-    :return:
-    """
-    pass
-    if not os.path.exists(config.MAXMIND_ROOT):
-        os.makedirs(config.MAXMIND_ROOT)
-
-    update_maxmind_file(config.MAXMIND_COUNTRY_DB_URL)
-
-
-@manager.command
 def update_maxmind_city_db():
     """
     Download and uncompress maxmind city database.

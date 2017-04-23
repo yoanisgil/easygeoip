@@ -2,7 +2,7 @@ import socket
 
 import geoip2.database
 from sqlalchemy import func
-
+from geoalchemy2.elements import WKTElement
 from flask import jsonify, render_template
 
 from easygeoip import app
@@ -12,7 +12,8 @@ from easygeoip.models import TzWorld
 def get_time_zone(longitude, latitude):
     time_zone = 'Unknown'
 
-    tz_world = TzWorld.query.filter(func.ST_Contains(TzWorld.geom, 'POINT (%s %s)' % (longitude, latitude))).first()
+    tz_world = TzWorld.query.filter(
+        func.ST_Contains(TzWorld.geom, WKTElement('POINT (%s %s)' % (longitude, latitude), srid=4326))).first()
 
     if tz_world:
         time_zone = tz_world.tzid
@@ -30,6 +31,7 @@ def to_ip(target):
         result = socket.gethostbyname(target)
 
         return result
+
 
 @app.route('/<target>')
 def city_details(target):
@@ -53,10 +55,11 @@ def city_details(target):
 
     return jsonify(api_response)
 
+
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=app.config.get('DEBUG'))

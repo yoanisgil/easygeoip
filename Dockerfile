@@ -1,27 +1,38 @@
-#vim:set ft=dockerfile:
-FROM ubuntu 
+FROM python:2.7-slim 
 MAINTAINER Yoanis Gil<gil.yoanis@gmail.com>
 
-RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive \
-     apt-get -y install python python-dev python-pip libpq-dev && \
-     rm -rf /var/lib/apt/lists/*
+RUN mkdir /srv/app
+WORKDIR /srv/app
 
-# Create deployment directory
-RUN mkdir -p /webapp/
+# Install require software and libraries
+ADD ./docker/nginx.list /etc/apt/sources.list.d/nginx.list
 
-# Make deployment directory the current working directory
-WORKDIR /webapp
+RUN apt-get update && \
+    apt-get -y install curl && \ 
+    curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
+    apt-get update && \
+    apt-get -y install build-essential libpq-dev nginx supervisor && \
+    rm -rf /var/lib/apt/lists/*
+
+ADD ./docker/nginx.conf /etc/nginx/nginx.conf
+ADD ./docker/supervisord.conf /etc/supervisor/supervisord.conf
+RUN rm /etc/nginx/conf.d/default.conf
+ADD ./docker/site.conf /etc/nginx/conf.d/site.conf
+
+# Create nginx temporary folders.
+RUN mkdir -p /tmp/nginx /tmp/app/logs && chown -R www-data: /tmp/nginx /tmp/app/logs
+
+# Copy as early as possible so we can cache ...
+ADD ./requirements.txt /srv/app/requirements.txt
+
+# Install application dependencies
+RUN pip install  --no-cache-dir -r requirements.txt
 
 # Add the application
-ADD . /webapp
+ADD . /srv/app
 
-RUN pip install -r requirements.txt
+# Download Maxmind Database
+RUN python cli.py update_maxmind_city_db
 
-EXPOSE 5000
-
-RUN python cli.py update_maxmind_city_db 
-RUN python cli.py update_maxmind_country_db
-
-CMD ["python", "/webapp/easygeoip.py"]
-
+# Application entrypoint
+CMD ["supervisord", "-u", "www-data", "-n", "-c", "/etc/supervisor/supervisord.conf"]

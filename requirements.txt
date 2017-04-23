@@ -13,3 +13,4 @@ maxminddb==1.2.0
 psycopg2==2.6
 requests==2.6.2
 wsgiref==0.1.2
+uwsgi==2.0.14

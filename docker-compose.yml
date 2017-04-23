@@ -1,8 +1,18 @@
-easygeoip:
-  build: .
-  links:
-   - tzworld
-  ports:
-   - "5000:5000"
-tzworld:
-  image: yoanisgil/tzworld
+version: '2'
+
+services:
+    app:
+      build: .
+      image: easygeoip_app
+      command: ["python", "/srv/app/main.py"]
+      volumes:
+        - .:/srv/app
+      ports:
+       - "5000:5000"
+      environment:
+        - DB_PASSWORD=thepassword
+        - DEBUG=1
+    tz_world_db:
+      image: yoanisgil/tz_world:28032016
+      ports:
+        - "5555:5432"
