@@ -2,8 +2,8 @@ version: '2'
 
 services:
     app:
-      build: .
       image: easygeoip_app
+      build: .
       command: ["python", "/srv/app/main.py"]
       volumes:
         - .:/srv/app
