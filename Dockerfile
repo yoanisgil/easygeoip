@@ -14,11 +14,12 @@ ADD ./docker/nginx.list /etc/apt/sources.list.d/nginx.list
 # - Nginx
 # - libpq-dev because we need to install PostgresSQL's binding for Python
 RUN apt-get update && \
-    apt-get -y install curl && \ 
-    curl http://nginx.org/keys/nginx_signing.key | apt-key add - && \
+    apt-get -y install wget gnupg && \
+    wget https://nginx.org/keys/nginx_signing.key && \
+    cat nginx_signing.key | apt-key add - && \
     apt-get update && \
     apt-get -y install build-essential libpq-dev nginx supervisor && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* 
 
 # Add Nginx configuration
 ADD ./docker/nginx.conf /etc/nginx/nginx.conf
